@@ -1,4 +1,4 @@
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from tkinter import *
 import matplotlib
 from matplotlib.figure import Figure
@@ -19,4 +19,14 @@ canvas = FigureCanvasTkAgg(f, window)
 canvas.draw()
 canvas.get_tk_widget().place(relx=0.5, rely=0.5, anchor=CENTER)
 
-window.mainloop()
+# Have to do this to prevent closing on scroll
+
+
+def mainloop():
+    try:
+        window.mainloop()
+    except UnicodeDecodeError:
+        mainloop()
+
+
+mainloop()
