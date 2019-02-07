@@ -2,9 +2,12 @@ import matplotlib
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
 import tkinter as tk
+from tkinter import ttk
 matplotlib.use("TkAgg")
 
-large_font = ("ComicSansMS", 20)
+large_font = ("ComicSansMS", 40)
+med_font = ("ComicSansMS", 30)
+small_font = ("ComicSansMS", 20)
 
 
 class Connect4App(tk.Tk):
@@ -43,9 +46,19 @@ class StartPage(tk.Frame):
 
     def __init__(self, window, controller):
 
-        tk.Frame.__init__(self, window)
-        label = tk.Label(self, text="Welcome", font=large_font)
-        label.pack(pady=10, padx=10)
+        ttk.Frame.__init__(self, window)
+        self.grid_columnconfigure(1, weight=1)
+
+        title = ttk.Label(self, text="Welcome to Connect 4!", font=large_font)
+        title.grid(row=1, column=1)
+
+        toss = ttk.Label(self, text="Choose heads or tails", font=med_font)
+        toss.grid(row=2, column=1)
+
+        button_heads = ttk.Button(self, text="Heads", command=heads, width=6)
+        button_tails = ttk.Button(self, text="Tails", command=tails, width=6)
+        button_heads.grid(row=3, column=1)
+        button_tails.grid(row=4, column=1)
 
 
 def runapp(app):
@@ -53,6 +66,16 @@ def runapp(app):
         app.mainloop()
     except UnicodeDecodeError:
         runapp()
+
+
+def heads():
+    result = 1
+    return
+
+
+def tails():
+    result = 0
+    return
 
 
 app = Connect4App()
