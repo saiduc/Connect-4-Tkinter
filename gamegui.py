@@ -5,9 +5,9 @@ import tkinter as tk
 from tkinter import ttk
 matplotlib.use("TkAgg")
 
-large_font = ("ComicSansMS", 40)
-med_font = ("ComicSansMS", 30)
-small_font = ("ComicSansMS", 20)
+large = ("ComicSansMS", 40)
+med = ("ComicSansMS", 30)
+small = ("ComicSansMS", 20)
 
 
 class Connect4App(tk.Tk):
@@ -27,12 +27,14 @@ class Connect4App(tk.Tk):
         # dictionary with all frames in the app listed
         self.frames = {}
 
-        # displays StartPage frame upon initialisation of app
-        frame = StartPage(container, self)
-        self.frames[StartPage] = frame   # adds StartPage to dictionary
-        frame.grid(row=0, column=0, sticky="nsew")
-        self.show_frame(StartPage)
+        # creates each page and adds it to container
+        for f in (StartPage, TossPage):
+            frame = f(container, self)
+            self.frames[f] = frame   # adds pages to dictionary
+            frame.grid(row=0, column=0, sticky="nsew")
+            self.show_frame(StartPage)
 
+    # raises necessary page to top to see
     def show_frame(self, page):
 
         frame = self.frames[page]
@@ -41,7 +43,7 @@ class Connect4App(tk.Tk):
 
 class StartPage(tk.Frame):
     """
-    Start Page, contains welcome screen and coin toss
+    Start Page, contains welcome screen and button to start
     """
 
     def __init__(self, window, controller):
@@ -49,10 +51,27 @@ class StartPage(tk.Frame):
         ttk.Frame.__init__(self, window)
         self.grid_columnconfigure(1, weight=1)
 
-        title = ttk.Label(self, text="Welcome to Connect 4!", font=large_font)
+        title = ttk.Label(self, text="Welcome to Connect 4!", font=large)
         title.grid(row=1, column=1)
 
-        toss = ttk.Label(self, text="Choose heads or tails", font=med_font)
+        button_continue = ttk.Button(self, text="Begin",
+                                     command=lambda: controller.show_frame(TossPage))
+        button_continue.grid(row=2, column=1)
+
+
+class TossPage(tk.Frame):
+    """
+    Toss Page, contains coin toss function
+    """
+
+    def __init__(self, window, controller):
+        ttk.Frame.__init__(self, window)
+        self.grid_columnconfigure(1, weight=1)
+
+        title = ttk.Label(self, text="Coin Toss", font=large)
+        title.grid(row=1, column=1)
+
+        toss = ttk.Label(self, text="Choose heads or tails", font=med)
         toss.grid(row=2, column=1)
 
         button_heads = ttk.Button(self, text="Heads", command=heads, width=6)
