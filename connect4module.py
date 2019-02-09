@@ -1,5 +1,5 @@
-import string
-from matplotlib import pyplot as plt
+# import string
+# from matplotlib import pyplot as plt
 import numpy as np
 
 
@@ -44,21 +44,14 @@ def makearrayboard():
     return board
 
 
-def cointoss():
+def cointoss(call):
     """
-    Asks user input string 0 or 1 and compares with randomly generated 0 or 1   
-    Error catching if user chooses non-zero or 1
+    Uses button input 0 or 1 and compares with randomly generated 0 or 1   
     """
-    userin = input('please choose a number: 0 or 1: ')
-    while ((userin != '1') and (userin != '0')):  # this is the error catching
-        print('please only enter an integer value of 0 or 1:')
-        userin = input('please choose a number: 0 or 1:')
     coin = np.random.randint(0, 2)
-    if coin == userin:
-        print('you won the toss')
+    if coin == call:
         return True
     else:
-        print('computer won the toss')
         return False
 
 
