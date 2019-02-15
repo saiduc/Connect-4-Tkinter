@@ -1,21 +1,23 @@
-# import string
-# from matplotlib import pyplot as plt
+import string
+import matplotlib
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from matplotlib.figure import Figure
 import numpy as np
+matplotlib.use("TkAgg")
 
 
 def makegraphicalboard():
     """
     Makes an empty board with the required dimensions and labels.
     """
-    plt.plot()
+    fig = Figure(figsize=(7, 7), dpi=100)
+    # a = fig.add_subplot(111)
+    # a.plot()
     # these are the labels to make the board look nice
-    plt.xticks([1, 2, 3, 4, 5, 6, 7, 8], ['a', 'b', 'c', 'd', 'e', 'f', 'g'])
-    plt.yticks([1, 2, 3, 4, 5, 6, 7], ['1', '2', '3', '4', '5', '6'])
-    fig = plt.gcf()
-    # this is to make the board big enough that the user can see it
-    fig.set_figheight(10)
-    fig.set_figwidth(10)
-    return
+    # a.xaxis.set_ticks([1, 2, 3, 4, 5, 6, 7, 8], [
+    # 'a', 'b', 'c', 'd', 'e', 'f', 'g'])
+    # a.yaxis.set_ticks([1, 2, 3, 4, 5, 6, 7], ['1', '2', '3', '4', '5', '6'])
+    return fig
 
 
 def loadgame(filename):
@@ -46,7 +48,7 @@ def makearrayboard():
 
 def cointoss(call):
     """
-    Uses button input 0 or 1 and compares with randomly generated 0 or 1   
+    Uses button input 0 or 1 and compares with randomly generated 0 or 1
     """
     coin = np.random.randint(0, 2)
     if coin == call:
@@ -57,7 +59,7 @@ def cointoss(call):
 
 def takeusermove():
     """
-    Asks user input string for the column to be played. 
+    Asks user input string for the column to be played.
     Input s to save game
     Error catching if user inputs anything other than a,b,c,d,e,f,g or s
     """
@@ -82,7 +84,7 @@ def takeusermove():
 def checkifvalid(board, column):
     """
     Takes input parameters board and column
-    Checks if move is valid by checking for vacanciesin that column. 
+    Checks if move is valid by checking for vacanciesin that column.
     Returns True if move is valid
     """
     valid = False  # just checks if there are any empty spaces in the column
@@ -288,19 +290,29 @@ def plotgraphicalboard(board):
     computerwony = np.array(computerwony) - 1
     computerwony = ((computerwony * -1) + 5)
 
-    makegraphicalboard()
-    plt.axis([0, 8, 0, 7])
-    plt.plot(userx, usery, marker='o', markersize=50,
-             linestyle=' ', color='red')
-    plt.plot(computerx, computery, marker='o',
-             markersize=50, linestyle=' ', color='yellow')
-    plt.plot(computerwonx, computerwony, marker='o', markersize=50,
-             linestyle='-', linewidth=20, color='yellow')
-    plt.plot(userwonx, userwony, marker='o', markersize=50,
-             linestyle='-', linewidth=20, color='red')
-    plt.grid(b=True, which='major', color='black', linestyle='-')
-    plt.show()
-    return
+    f = makegraphicalboard()
+    a = f.add_subplot(111)
+    a.axis([0, 8, 0, 7])
+    a.plot()
+    # a.xaxis.set_ticks([1, 2, 3, 4, 5, 6, 7, 8], [
+    # 'a', 'b', 'c', 'd', 'e', 'f', 'g'])
+    # a.yaxis.set_ticks([1, 2, 3, 4, 5, 6, 7], ['1', '2', '3', '4', '5', '6'])
+
+    a.axis([0, 8, 0, 7])
+    a.plot(userx, usery, marker='o', markersize=50,
+           linestyle=' ', color='red')
+    a.plot(computerx, computery, marker='o',
+           markersize=50, linestyle=' ', color='yellow')
+    a.plot(computerwonx, computerwony, marker='o', markersize=50,
+           linestyle='-', linewidth=20, color='yellow')
+    a.plot(userwonx, userwony, marker='o', markersize=50,
+           linestyle='-', linewidth=20, color='red')
+    a.grid(b=True, which='major', color='black', linestyle='-')
+    # a.xticks([1, 2, 3, 4, 5, 6, 7, 8], ['a', 'b', 'c', 'd', 'e', 'f', 'g'])
+    # ylabels = [item.get_text() for item in ]
+    # a.yaxis.set_ticks([' ', '1', '2', '3', '4', '5', '6'])
+
+    return f
 
 
 def decidecomputermove(board):
@@ -309,12 +321,12 @@ def decidecomputermove(board):
     The computer will actively block near wins for players.
     It will also actively complete its near wins.
 
-    When blocking or completing near wins, the computer will check the disc 
-    underneath the empty slot in the near win configuration. It will only block 
-    or complete if this slot is full. The prevents the computer from trying to 
+    When blocking or completing near wins, the computer will check the disc
+    underneath the empty slot in the near win configuration. It will only block
+    or complete if this slot is full. The prevents the computer from trying to
     block a slot but playing into the one underneath it.
 
-    The computer will also play the middle if possible or the one next to the 
+    The computer will also play the middle if possible or the one next to the
     middle if this is not possible. This is a popular Connect 4 strategy
     """
     column = np.random.randint(0, 7)
@@ -533,7 +545,7 @@ def decidecomputermove(board):
 def docomputermove(board, column):
     """
     Takes input parameters board and column
-    This is almost identical to the dousermove function. 
+    This is almost identical to the dousermove function.
     Places the coin in the lowest unoccupied slot on the board.
     """
     placed = False
