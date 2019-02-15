@@ -95,9 +95,9 @@ class TossPage(tk.Frame):
         button_heads.grid(row=3, column=1)
         button_tails.grid(row=4, column=1)
 
-        button_home = ttk.Button(self, text="Home", command=lambda:
-                                 controller.show_frame(StartPage))
-        button_home.grid(row=5, column=1)
+        # button_home = ttk.Button(self, text="Home", command=lambda:
+        #                          controller.show_frame(StartPage))
+        # button_home.grid(row=5, column=1)
 
         # empty labels that will be updated with outcome after user selects
         outcome = ttk.Label(self, text="", font=med)
@@ -109,7 +109,7 @@ class TossPage(tk.Frame):
         button_win = ttk.Button(self, text="Continue", command=lambda:
                                 controller.show_frame(BoardPageWin))
         button_lose = ttk.Button(self, text="Continue", command=lambda:
-                                 controller.show_frame(BoardPageLose))
+                                 controller.show_frame(BoardPageWin))
 
     def heads(self, outcome, nextstep, button_heads, button_tails, button_win, button_lose):
         """
@@ -193,17 +193,38 @@ class BoardPageWin(tk.Frame):
     def __init__(self, window, controller):
 
         ttk.Frame.__init__(self, window)
-        self.grid_columnconfigure(1, weight=1)
+        self.grid_columnconfigure(5, weight=1)
 
         title = ttk.Label(self, text="You will Play First", font=large)
-        title.grid(row=1, column=1)
+        title.grid(row=1, column=5)
+        grid = c4.makearrayboard()
+        tst = c4.plotgraphicalboard(grid)
+
+        canvas = FigureCanvasTkAgg(tst, self)
+        canvas.draw()
+        canvas.get_tk_widget().grid(row=2, column=5)
+
+        button_a = ttk.Button(self, text="a", command=self.donothing)
+        button_b = ttk.Button(self, text="b", command=self.donothing)
+        button_c = ttk.Button(self, text="c", command=self.donothing)
+        button_d = ttk.Button(self, text="d", command=self.donothing)
+        button_e = ttk.Button(self, text="e", command=self.donothing)
+        button_f = ttk.Button(self, text="f", command=self.donothing)
+        button_g = ttk.Button(self, text="g", command=self.donothing)
+
+    def donothing(self):
+        """
+        Function that does nothing.
+        Makes a button useless if assigned to it
+        """
+        pass
 
 
 def runapp(app):
     try:
         app.mainloop()
     except UnicodeDecodeError:
-        runapp()
+        runapp(app)
 
 
 app = Connect4App()
