@@ -120,8 +120,8 @@ class TossPage(tk.Frame):
         """
         call = 1
         result = c4.cointoss(call)
-        button_tails.configure(text="", command=self.donothing)
-        button_heads.configure(command=self.donothing)
+        button_tails.configure(text="", command=donothing)
+        button_heads.configure(command=donothing)
         if result == True:
             outcome.configure(text="You won the toss!")
             nextstep.configure(text="You will play first")
@@ -145,8 +145,8 @@ class TossPage(tk.Frame):
         """
         call = 0
         result = c4.cointoss(call)
-        button_heads.configure(text="", command=self.donothing)
-        button_tails.configure(command=self.donothing)
+        button_heads.configure(text="", command=donothing)
+        button_tails.configure(command=donothing)
         if result == True:
             outcome.configure(text="You won the toss!")
             nextstep.configure(text="You will play first")
@@ -160,13 +160,6 @@ class TossPage(tk.Frame):
         button_heads.update()
         button_tails.update()
         return
-
-    def donothing(self):
-        """
-        Function that does nothing.
-        Makes a button useless if assigned to it
-        """
-        pass
 
 
 class BoardPageLose(tk.Frame):
@@ -193,31 +186,162 @@ class BoardPageWin(tk.Frame):
     def __init__(self, window, controller):
 
         ttk.Frame.__init__(self, window)
-        self.grid_columnconfigure(5, weight=1)
+        # self.grid_columnconfigure(1, weight=1)
 
         title = ttk.Label(self, text="You will Play First", font=large)
-        title.grid(row=1, column=5)
-        grid = c4.makearrayboard()
-        tst = c4.plotgraphicalboard(grid)
+        title.grid(row=1, column=1)
+        board = c4.makearrayboard()
+        graph = c4.plotgraphicalboard(board)
 
-        canvas = FigureCanvasTkAgg(tst, self)
+        canvas = FigureCanvasTkAgg(graph, self)
         canvas.draw()
-        canvas.get_tk_widget().grid(row=2, column=5)
+        canvas.get_tk_widget().grid(row=2, column=1)
 
-        button_a = ttk.Button(self, text="a", command=self.donothing)
-        button_b = ttk.Button(self, text="b", command=self.donothing)
-        button_c = ttk.Button(self, text="c", command=self.donothing)
-        button_d = ttk.Button(self, text="d", command=self.donothing)
-        button_e = ttk.Button(self, text="e", command=self.donothing)
-        button_f = ttk.Button(self, text="f", command=self.donothing)
-        button_g = ttk.Button(self, text="g", command=self.donothing)
+        separator = ttk.Label(self, text=" ", font=med)
+        separator.grid(row=3, column=1)
+        statement = ttk.Label(self, text="Choose column to play in", font=large)
+        statement.grid(row=4, column=1)
 
-    def donothing(self):
-        """
-        Function that does nothing.
-        Makes a button useless if assigned to it
-        """
-        pass
+        button_a = ttk.Button(self, text="a", command=lambda:
+                              self.choose_a(board, buttons, statement), width=1)
+        button_b = ttk.Button(self, text="b", command=lambda:
+                              self.choose_b(board, buttons, statement), width=1)
+        button_c = ttk.Button(self, text="c", command=lambda:
+                              self.choose_c(board, buttons, statement), width=1)
+        button_d = ttk.Button(self, text="d", command=lambda:
+                              self.choose_d(board, buttons, statement), width=1)
+        button_e = ttk.Button(self, text="e", command=lambda:
+                              self.choose_e(board, buttons, statement), width=1)
+        button_f = ttk.Button(self, text="f", command=lambda:
+                              self.choose_f(board, buttons, statement), width=1)
+        button_g = ttk.Button(self, text="g", command=lambda:
+                              self.choose_g(board, buttons, statement), width=1)
+
+        button_a.place(x=73, y=760)
+        button_b.place(x=159, y=760)
+        button_c.place(x=245, y=760)
+        button_d.place(x=331, y=760)
+        button_e.place(x=417, y=760)
+        button_f.place(x=503, y=760)
+        button_g.place(x=589, y=760)
+
+        buttons = [button_a, button_b, button_c,
+                   button_d, button_e, button_f, button_g]
+
+    def choose_a(self, board, buttons, statement):
+        usercolumn = 0
+        if c4.checkifvalid(board, usercolumn) == True:
+            c4.dousermove(board, 0)
+            self.continuegame(board, buttons, statement)
+
+    def choose_b(self, board, buttons, statement):
+        usercolumn = 1
+        if c4.checkifvalid(board, usercolumn) == True:
+            c4.dousermove(board, 1)
+            self.continuegame(board, buttons, statement)
+
+    def choose_c(self, board, buttons, statement):
+        usercolumn = 2
+        if c4.checkifvalid(board, usercolumn) == True:
+            c4.dousermove(board, 2)
+            self.continuegame(board, buttons, statement)
+
+    def choose_d(self, board, buttons, statement):
+        usercolumn = 3
+        if c4.checkifvalid(board, usercolumn) == True:
+            c4.dousermove(board, 3)
+            self.continuegame(board, buttons, statement)
+
+    def choose_e(self, board, buttons, statement):
+        usercolumn = 4
+        if c4.checkifvalid(board, usercolumn) == True:
+            c4.dousermove(board, 4)
+            self.continuegame(board, buttons, statement)
+
+    def choose_f(self, board, buttons, statement):
+        usercolumn = 5
+        if c4.checkifvalid(board, usercolumn) == True:
+            c4.dousermove(board, 5)
+            self.continuegame(board, buttons, statement)
+
+    def choose_g(self, board, buttons, statement):
+        usercolumn = 6
+        if c4.checkifvalid(board, usercolumn) == True:
+            c4.dousermove(board, 6)
+            self.continuegame(board, buttons, statement)
+
+    def continuegame(self, board, buttons, statement):
+        gamestate = c4.checkgamestate(board)
+
+        if gamestate == 0:
+            computercolumn = c4.decidecomputermove(board)
+            while c4.checkifvalid(board, computercolumn) != True:
+                computercolumn = c4.decidecomputermove(board)
+            c4.docomputermove(board, computercolumn)
+            gamestate = c4.checkgamestate(board)
+            graph = c4.plotgraphicalboard(board)
+            canvas = FigureCanvasTkAgg(graph, self)
+            canvas.draw()
+            canvas.get_tk_widget().grid(row=2, column=1)
+
+        if gamestate == 1:
+            graph = c4.plotgraphicalboard(board)
+            canvas = FigureCanvasTkAgg(graph, self)
+            canvas.draw()
+            canvas.get_tk_widget().grid(row=2, column=1)
+            buttons[0].configure(command=donothing)
+            buttons[1].configure(command=donothing)
+            buttons[2].configure(command=donothing)
+            buttons[3].configure(command=donothing)
+            buttons[4].configure(command=donothing)
+            buttons[5].configure(command=donothing)
+            buttons[6].configure(command=donothing)
+            buttons[0].update()
+            buttons[1].update()
+            buttons[2].update()
+            buttons[3].update()
+            buttons[4].update()
+            buttons[5].update()
+            buttons[6].update()
+            statement.configure(text="You Won! Congratulations!")
+            statement.update()
+            print("You win")
+
+        if gamestate == 2:
+            buttons[0].configure(command=donothing)
+            buttons[1].configure(command=donothing)
+            buttons[2].configure(command=donothing)
+            buttons[3].configure(command=donothing)
+            buttons[4].configure(command=donothing)
+            buttons[5].configure(command=donothing)
+            buttons[6].configure(command=donothing)
+            buttons[0].update()
+            buttons[1].update()
+            buttons[2].update()
+            buttons[3].update()
+            buttons[4].update()
+            buttons[5].update()
+            buttons[6].update()
+            statement.configure(text="You Lost! Better luck next time")
+            statement.update()
+            print("You lose")
+
+        if gamestate == 3:
+            graph = c4.plotgraphicalboard(board)
+            canvas = FigureCanvasTkAgg(graph, self)
+            canvas.draw()
+            canvas.get_tk_widget().grid(row=2, column=1)
+            statement.configure(text="The game ended in a draw")
+            statement.update()
+            print("You draw")
+
+
+def donothing():
+    """
+    Function that does nothing.
+    Makes a button useless if assigned to it
+    """
+    pass
 
 
 def runapp(app):
@@ -229,31 +353,3 @@ def runapp(app):
 
 app = Connect4App()
 runapp(app)
-
-
-# window = tk.Tk()
-# window.title('Connect 4')
-# window.geometry('1000x800')
-
-# Label(window, text='Connect 4', font='ComicSansMS 30 bold underline').place(
-#     relx=0.5, rely=0.03, anchor=CENTER)
-
-# # Placeholder Plot
-# f = Figure(figsize=(5, 5), dpi=100)
-# a = f.add_subplot(111)
-# a.plot([1, 2, 3, 4, 5], [1, 2, 3, 4, 5])
-# canvas = FigureCanvasTkAgg(f, window)
-# canvas.draw()
-# canvas.get_tk_widget().place(relx=0.5, rely=0.5, anchor=CENTER)
-
-# # Have to do this to prevent closing on scroll
-
-
-# def mainloop():
-#     try:
-#         window.mainloop()
-#     except UnicodeDecodeError:
-#         mainloop()
-
-
-# mainloop()
