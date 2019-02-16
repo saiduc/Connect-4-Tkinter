@@ -95,10 +95,6 @@ class TossPage(tk.Frame):
         button_heads.grid(row=3, column=1)
         button_tails.grid(row=4, column=1)
 
-        # button_home = ttk.Button(self, text="Home", command=lambda:
-        #                          controller.show_frame(StartPage))
-        # button_home.grid(row=5, column=1)
-
         # empty labels that will be updated with outcome after user selects
         outcome = ttk.Label(self, text="", font=med)
         outcome.grid(row=6, column=1)
@@ -171,7 +167,6 @@ class BoardPageLose(tk.Frame):
     def __init__(self, window, controller):
 
         ttk.Frame.__init__(self, window)
-        # self.grid_columnconfigure(1, weight=1)
 
         title = ttk.Label(
             self, text="Connect 4 Game", font=large)
@@ -260,6 +255,13 @@ class BoardPageLose(tk.Frame):
             self.continuegame(board, buttons, statement)
 
     def continuegame(self, board, buttons, statement):
+        """
+        Main game function. Checks the gamestate to see if game is over
+        If game is not over, makes the computer move and checks again
+        If game is still not over, allows player to make another move
+        If game is over, displays the appropriate labels
+        Makes all buttons useless game is over
+        """
         gamestate = c4.checkgamestate(board)
 
         if gamestate == 0:
@@ -334,7 +336,6 @@ class BoardPageWin(tk.Frame):
     def __init__(self, window, controller):
 
         ttk.Frame.__init__(self, window)
-        # self.grid_columnconfigure(1, weight=1)
 
         title = ttk.Label(self, text="Connect 4 Game", font=large)
         title.grid(row=1, column=1)
@@ -419,6 +420,14 @@ class BoardPageWin(tk.Frame):
             self.continuegame(board, buttons, statement)
 
     def continuegame(self, board, buttons, statement):
+        """
+        Main game function. Checks the gamestate to see if game is over
+        If game is not over, makes the computer move and checks again
+        If game is still not over, allows player to make another move
+        If game is over, displays the appropriate labels
+        Makes all buttons useless game is over
+        """
+
         gamestate = c4.checkgamestate(board)
 
         if gamestate == 0:
