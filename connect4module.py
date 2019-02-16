@@ -10,7 +10,7 @@ def makegraphicalboard():
     """
     Makes an empty board with the required dimensions and labels.
     """
-    fig = Figure(figsize=(7, 7), dpi=100)
+    fig = Figure(figsize=(7, 7), dpi=50)
     # a = fig.add_subplot(111)
     # a.plot()
     # these are the labels to make the board look nice
@@ -18,24 +18,6 @@ def makegraphicalboard():
     # 'a', 'b', 'c', 'd', 'e', 'f', 'g'])
     # a.yaxis.set_ticks([1, 2, 3, 4, 5, 6, 7], ['1', '2', '3', '4', '5', '6'])
     return fig
-
-
-def loadgame(filename):
-    """
-    Takes input parameter string filename and loads a saved array as the board
-    """
-    board = np.loadtxt(
-        filename, ndmin=2)
-    return board
-
-
-def savegame(filename, board):
-    """
-    Takes input parameters filename and board and saves the array into a file
-    """
-    np.savetxt(filename, board,
-               fmt='%d')  # this saves the array as integer numbers
-    return
 
 
 def makearrayboard():
@@ -55,30 +37,6 @@ def cointoss(call):
         return True
     else:
         return False
-
-
-def takeusermove():
-    """
-    Asks user input string for the column to be played.
-    Input s to save game
-    Error catching if user inputs anything other than a,b,c,d,e,f,g or s
-    """
-    userin = input('usermove')
-    while ((userin != 'a') and (userin != 'b') and (userin != 'c')
-           and (userin != 'd') and (userin != 'e') and (userin != 'f')
-           and (userin != 'g') and (userin != 's')):
-        print('please only enter a string value of a, b, c, d, e, f, g or s')
-        userin = input('usermove')
-
-    if userin != 's':
-        letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
-        for i in range(7):
-            if (userin == letters[i]):
-                column = i
-        return column  # this is the numerical column to be returned
-
-    if userin == 's':
-        return 'exit'  # triggers the savegame function in the main game
 
 
 def checkifvalid(board, column):
