@@ -11,12 +11,6 @@ def makegraphicalboard():
     Makes an empty board with the required dimensions and labels.
     """
     fig = Figure(figsize=(7, 7), dpi=50)
-    # a = fig.add_subplot(111)
-    # a.plot()
-    # these are the labels to make the board look nice
-    # a.xaxis.set_ticks([1, 2, 3, 4, 5, 6, 7, 8], [
-    # 'a', 'b', 'c', 'd', 'e', 'f', 'g'])
-    # a.yaxis.set_ticks([1, 2, 3, 4, 5, 6, 7], ['1', '2', '3', '4', '5', '6'])
     return fig
 
 
@@ -252,13 +246,7 @@ def plotgraphicalboard(board):
     a = f.add_subplot(111)
     f.subplots_adjust(left=0.01, bottom=0.01, right=0.99, top=0.99)
     a.axis([0, 8, 0, 7])
-    # f.subplots_adjust(left=0, bottom=0, right=1, top=1)
     a.plot()
-    # a.xaxis.set_ticks([1, 2, 3, 4, 5, 6, 7, 8], [
-    # 'a', 'b', 'c', 'd', 'e', 'f', 'g'])
-    # a.yaxis.set_ticks([1, 2, 3, 4, 5, 6, 7], ['1', '2', '3', '4', '5', '6'])
-
-    # a.axis([0, 8, 0, 7])
     a.plot(userx, usery, marker='o', markersize=50,
            linestyle=' ', color='red')
     a.plot(computerx, computery, marker='o',
@@ -268,9 +256,6 @@ def plotgraphicalboard(board):
     a.plot(userwonx, userwony, marker='o', markersize=50,
            linestyle='-', linewidth=20, color='red')
     a.grid(b=True, which='major', color='black', linestyle='-')
-    # a.xticks([1, 2, 3, 4, 5, 6, 7, 8], ['a', 'b', 'c', 'd', 'e', 'f', 'g'])
-    # ylabels = [item.get_text() for item in ]
-    # a.yaxis.set_ticks([' ', '1', '2', '3', '4', '5', '6'])
 
     return f
 
