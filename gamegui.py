@@ -501,6 +501,7 @@ def donothing():
     pass
 
 
+# Stops program crashing on mac due to UnicodeDecodeError
 def runapp(app):
     try:
         app.mainloop()
