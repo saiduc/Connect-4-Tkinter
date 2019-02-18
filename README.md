@@ -23,6 +23,8 @@ I didn't want to spend too long rewriting my actual game so some of the implemen
 
 I now feel confident making simple Python apps with multiple frame GUIs, and using basic GUI interface tools like buttons. I can also display matplotlib graphs in the Tkinter frame.
 
+## License
+This project is licensed under the terms of the MIT license. Do whatever you want with it!
 
 ## Acknowledgements
 
