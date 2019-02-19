@@ -12,6 +12,9 @@ Just run the gamegui.py in whichever way you normally run python files
 * Basic AI so computer will actively try to win and block player's winning moves
 * Game board is displayed using matplotlib plot
 
+## Screenshots
+<img width="462" alt="game_screenshot" src="https://user-images.githubusercontent.com/40459599/53034902-2ac24d80-346c-11e9-94d3-85b3db84ad71.png">
+
 ## Requirements
 * Python 3
 * Matplotlib and Numpy modules
