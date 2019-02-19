@@ -13,7 +13,7 @@ Just run the gamegui.py in whichever way you normally run python files
 * Game board is displayed using matplotlib plot
 
 ## Screenshots
-<img width="462" alt="game_screenshot" src="https://user-images.githubusercontent.com/40459599/53034902-2ac24d80-346c-11e9-94d3-85b3db84ad71.png">
+<img width="300" alt="game_screenshot" src="https://user-images.githubusercontent.com/40459599/53034902-2ac24d80-346c-11e9-94d3-85b3db84ad71.png">
 
 ## Requirements
 * Python 3
