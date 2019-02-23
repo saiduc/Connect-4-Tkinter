@@ -1,3 +1,4 @@
+import platform
 import matplotlib
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
@@ -201,13 +202,22 @@ class BoardPageLose(tk.Frame):
         button_g = ttk.Button(self, text="g", command=lambda:
                               self.choose_g(board, buttons, statement), width=1)
 
-        button_a.place(x=25, y=410)
-        button_b.place(x=68, y=410)
-        button_c.place(x=111, y=410)
-        button_d.place(x=154, y=410)
-        button_e.place(x=197, y=410)
-        button_f.place(x=240, y=410)
-        button_g.place(x=283, y=410)
+        if platform.system() == "Windows":
+            button_a.place(x=68, y=410)
+            button_b.place(x=111, y=410)
+            button_c.place(x=154, y=410)
+            button_d.place(x=197, y=410)
+            button_e.place(x=240, y=410)
+            button_f.place(x=283, y=410)
+            button_g.place(x=327, y=410)
+        else:
+            button_a.place(x=25, y=410)
+            button_b.place(x=68, y=410)
+            button_c.place(x=111, y=410)
+            button_d.place(x=154, y=410)
+            button_e.place(x=197, y=410)
+            button_f.place(x=240, y=410)
+            button_g.place(x=283, y=410)
 
         buttons = [button_a, button_b, button_c,
                    button_d, button_e, button_f, button_g]
@@ -366,13 +376,22 @@ class BoardPageWin(tk.Frame):
         button_g = ttk.Button(self, text="g", command=lambda:
                               self.choose_g(board, buttons, statement), width=1)
 
-        button_a.place(x=25, y=410)
-        button_b.place(x=68, y=410)
-        button_c.place(x=111, y=410)
-        button_d.place(x=154, y=410)
-        button_e.place(x=197, y=410)
-        button_f.place(x=240, y=410)
-        button_g.place(x=283, y=410)
+        if platform.system() == "Windows":
+            button_a.place(x=68, y=410)
+            button_b.place(x=111, y=410)
+            button_c.place(x=154, y=410)
+            button_d.place(x=197, y=410)
+            button_e.place(x=240, y=410)
+            button_f.place(x=283, y=410)
+            button_g.place(x=327, y=410)
+        else:
+            button_a.place(x=25, y=410)
+            button_b.place(x=68, y=410)
+            button_c.place(x=111, y=410)
+            button_d.place(x=154, y=410)
+            button_e.place(x=197, y=410)
+            button_f.place(x=240, y=410)
+            button_g.place(x=283, y=410)
 
         buttons = [button_a, button_b, button_c,
                    button_d, button_e, button_f, button_g]
